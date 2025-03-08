@@ -17,7 +17,23 @@ class HTMLNode:
         if self.props is None:
             return ""
         return " ".join([f'{key}="{value}"' for key, value in self.props.items()])
-    
+
+class ParentNode(HTMLNode):
+    def __init__(self, tag, children, props=None):
+        super().__init__(tag, None, children, props)
+
+    def to_html(self):
+        if self.tag is None:
+            raise ValueError("ParentNode must have a tag")
+        if self.children is None:
+            raise ValueError("ParentNode must have children")
+        else:
+            # Recursively call to_html on each child and join the results.  Nest the children in the parent tag.
+            children_html = "".join([child.to_html() for child in self.children])
+            if self.props is None:
+                return f"<{self.tag}>{children_html}</{self.tag}>"
+            else:
+                return f"<{self.tag} {self.props_to_html()}>{children_html}</{self.tag}>"
 
 
     
