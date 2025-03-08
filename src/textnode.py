@@ -1,3 +1,4 @@
+# src/textnode.py
 from enum import Enum
 
 # Enum for inline text

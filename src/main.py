@@ -1,3 +1,4 @@
+# src/main.py
 from textnode import TextNode, TextType
 
 def main():
