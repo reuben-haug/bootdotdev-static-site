@@ -38,3 +38,4 @@ def text_node_to_html_node(self):
         return LeafNode("a", self.text, {"href": self.url})
     if self.text_type == TextType.IMAGE:
         return LeafNode("img", None, {"src": self.url, "alt": self.text})
+
