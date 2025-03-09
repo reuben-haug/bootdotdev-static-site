@@ -8,10 +8,10 @@ from src.split_delimiter import split_nodes_delimiter
 class TestSplitDelimiter(unittest.TestCase):
     def test_different_delimiters(self):
         test_cases = [
-            # (input text, delimiter, text_type, expected_node_count, expected_types)
+        # (input text, delimiter, text_type, expected_node_count, expected_types)
         ("This is **bold** text", "**", TextType.BOLD, 3, [TextType.TEXT, TextType.BOLD, TextType.TEXT]),
         ("This is _italic_ text", "_", TextType.ITALIC, 3, [TextType.TEXT, TextType.ITALIC, TextType.TEXT]),
-        ("This is `code` text", "`", TextType.CODE, 3, [TextType.TEXT, TextType.CODE, TextType.TEXT])
+        ("This is `code` text", "`", TextType.CODE, 3, [TextType.TEXT, TextType.CODE, TextType.TEXT]),
         ]
 
         for input_text, delimiter, text_type, expected_node_count, expected_types in test_cases:
