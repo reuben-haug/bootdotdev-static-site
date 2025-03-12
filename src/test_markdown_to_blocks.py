@@ -13,6 +13,10 @@ class TestMarkdownToBlocks(unittest.TestCase):
 
     - This is a list
     - with items
+
+    1. Th1s 1s an ordered list
+    2. with items
+    3. and numb3rs
     """
 
         blocks = markdown_to_blocks(md)
@@ -22,6 +26,7 @@ class TestMarkdownToBlocks(unittest.TestCase):
                 "This is a **bolded** paragraph",
                 "This is another paragraph with _italic_ text and `code` here\nThis is the same paragraph on a new line",
                 "- This is a list\n- with items",
+                "1. Th1s 1s an ordered list\n2. with items\n3. and numb3rs",
             ],
     )
 
