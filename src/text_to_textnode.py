@@ -3,7 +3,7 @@
 from src.textnode import TextNode, TextType
 from src.split_delimiter import split_nodes_delimiter, split_nodes_images, split_nodes_links
 
-def text_to_textnodes(text):
+def text_to_textnodes(text) -> list[TextNode]:
     """
     Returns a string of markdown text as a list of TextNode objects.  Empty strings are returned as a single TextNode object.
     """

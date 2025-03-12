@@ -1,4 +1,4 @@
-# src/test_textnode.py
+# tests/test_textnode.py
 import unittest
 
 from src.textnode import TextNode, TextType, text_node_to_html_node

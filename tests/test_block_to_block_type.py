@@ -1,4 +1,4 @@
-# src/test_block_to_block_type.py
+# tests/test_block_to_block_type.py
 
 import unittest
 

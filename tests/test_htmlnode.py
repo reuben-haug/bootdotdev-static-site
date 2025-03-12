@@ -1,4 +1,4 @@
-# src/test_htmlnode.py
+# tests/test_htmlnode.py
 import unittest
 
 from src.htmlnode import HTMLNode, LeafNode, ParentNode

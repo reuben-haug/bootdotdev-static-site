@@ -1,4 +1,4 @@
-# src/test_markdown_parser.py
+# tests/test_markdown_parser.py
 
 import unittest
 
