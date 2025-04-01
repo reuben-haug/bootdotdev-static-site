@@ -14,6 +14,12 @@ class BlockType(Enum):
 def block_to_block_type(block: str) -> BlockType:
     """
     Returns the BlockType of the input block.
+    
+
+    Args:
+        block (str): The input block of text.
+    Returns:
+        BlockType: The type of the block.
     """
     # Headings start with 1-6 '#' characters, followed by a space and then the text
     if re.match(r"^#{1,6}\s", block):
@@ -30,14 +36,11 @@ def block_to_block_type(block: str) -> BlockType:
     """A block is considered to be a list if *all* lines in the block start with the corresponding character for the list type."""
 
     # Unordered lists start with '- ' or '* '
-    for line in block:
-        if all(line.startswith("- ") or line.startswith("* ") for line in block.split("\n")):
-            return BlockType.UNORDERED_LIST
+    if all(re.match(r"^(-|\*)\s", line) for line in block.split("\n")):
+        return BlockType.UNORDERED_LIST
     
     # Ordered lists must start with a number, followed by a . character and space.
-
-    for line in block:
-        if all(line[0].isdigit() and line[1] == "." and line[2] == " " for line in block.split("\n")):
+    if all(re.match(r"^\d+\.\s", line) for line in block.split("\n")):
             return BlockType.ORDERED_LIST
     
     # If none of the above conditions are met, the block is a normal paragraph
