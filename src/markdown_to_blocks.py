@@ -1,28 +1,28 @@
 # src/markdown_to_blocks.py
 
-def markdown_to_blocks(md):
+from typing import List
+
+def markdown_to_blocks(md: str) -> List[str]:
     """
-    Takes a raw Markdown string and returns a list of block strings.
+    Takes a raw Markdown string and returns a list of block strings.  Used by the markdown_to_html_node function.
+
+    Splits the Markdown string into blocks based on double newlines.  Each block is stripped of leading and trailing whitespace.
+    Empty blocks are removed.
+    This function is used to convert a Markdown document into a list of blocks for further processing.
+
+    Args:
+        md (str): The Markdown string.
+    Returns:
+        List[str]: A list of block strings.
     """
     
-    blocks = []
-    lines = md.split("\n")
-    current_block = []
+    blocks = md.split("\n\n")
+    filtered_blocks = []
+    # Remove empty blocks and strip whitespace
+    for block in blocks:
+        if block == "":
+            continue
+        block = block.strip()
+        filtered_blocks.append(block)
 
-    for line in lines:
-        # If the line is empty (or just whitespace), it's a block separator
-        # only if we already have content in the current block
-        if line.strip() == "":
-            if current_block:
-                # Join the current block and add to blocks list
-                blocks.append("\n".join(current_block))
-                current_block = []
-        else:
-            # Strip leading whitespace from each line and add to current block
-            current_block.append(line.lstrip())
-
-    # Add the last block if there's any content
-    if current_block:
-        blocks.append("\n".join(current_block))
-
-    return blocks
+    return filtered_blocks
