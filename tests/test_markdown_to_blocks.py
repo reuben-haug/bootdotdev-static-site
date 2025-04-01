@@ -6,18 +6,18 @@ from src.markdown_to_blocks import markdown_to_blocks
 class TestMarkdownToBlocks(unittest.TestCase):
     def test_markdown_to_blocks(self):
         md = """
-    This is a **bolded** paragraph
+This is a **bolded** paragraph
 
-    This is another paragraph with _italic_ text and `code` here
-    This is the same paragraph on a new line
+This is another paragraph with _italic_ text and `code` here
+This is the same paragraph on a new line
 
-    - This is a list
-    - with items
+- This is a list
+- with items
 
-    1. Th1s 1s an ordered list
-    2. with items
-    3. and numb3rs
-    """
+1. Th1s 1s an ordered list
+2. with items
+3. and numb3rs
+"""
 
         blocks = markdown_to_blocks(md)
         self.assertEqual(
