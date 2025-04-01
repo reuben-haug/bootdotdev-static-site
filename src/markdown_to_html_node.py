@@ -41,7 +41,6 @@ def markdown_to_html_node(md: str) -> HTMLNode:
         else:
             raise ValueError(f"Invalid block type: {block_type}")
     
-    print(f"Node count: {len(parent.children)}")
     # Return the parent node with all children
     return parent
 
