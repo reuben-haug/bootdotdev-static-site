@@ -3,7 +3,7 @@
 import unittest
 from src.textnode import TextNode, TextType
 
-from text_to_textnode import text_to_textnodes
+from src.text_to_textnode import text_to_textnodes
 
 class TestTextToTextNode(unittest.TestCase):
     def test_text_to_textnodes(self):
