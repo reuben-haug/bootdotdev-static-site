@@ -1,4 +1,5 @@
 # src/htmlnode.py
+
 class HTMLNode:
     def __init__(self, tag, value=None, children=None, props=None):
         self.tag = tag
@@ -34,8 +35,6 @@ class ParentNode(HTMLNode):
                 return f"<{self.tag}>{children_html}</{self.tag}>"
             else:
                 return f"<{self.tag} {self.props_to_html()}>{children_html}</{self.tag}>"
-
-
     
 class LeafNode(HTMLNode):
     def __init__(self, tag, value, props=None):
@@ -55,4 +54,3 @@ class LeafNode(HTMLNode):
         else:
             # Add white space between the tag and the properties
             return f"<{self.tag} {self.props_to_html()}>{self.value}</{self.tag}>"
-            
