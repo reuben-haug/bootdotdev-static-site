@@ -1,6 +1,7 @@
 # src/textnode.py
+
 from enum import Enum
-from src.htmlnode import LeafNode
+from .htmlnode import LeafNode
 
 # Enum for inline text
 class TextType(Enum):

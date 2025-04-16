@@ -1,8 +1,8 @@
 # tests/test_block_html_node_helpers.py
 
-from src.markdown_to_html_node import text_to_children
-
 import unittest
+
+from src.markdown_to_html_node import text_to_children
 
 class TestBlockHtmlNodeHelpers(unittest.TestCase):
     

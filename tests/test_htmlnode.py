@@ -1,4 +1,5 @@
 # tests/test_htmlnode.py
+
 import unittest
 
 from src.htmlnode import HTMLNode, LeafNode, ParentNode
@@ -27,6 +28,15 @@ class TestParentNode(unittest.TestCase):
         child_node = ParentNode("div", [grandchild_node])
         parent_node = ParentNode("b", [child_node])
         self.assertEqual(parent_node.to_html(), "<b><div><span>grandchild</span></div></b>")
+
+    def test_leaf_node_img_tag(self):
+        node = LeafNode("img", None, {"src": "image.jpg", "alt": "alt text"})
+        self.assertEqual(node.to_html(), '<img src="image.jpg" alt="alt text">')
+
+    def test_to_html_no_value(self):
+        parent_node = ParentNode("img", None)
+        with self.assertRaises(ValueError):
+            parent_node.to_html()
 
     def test_to_html_no_children(self):
         parent_node = ParentNode("div", None)

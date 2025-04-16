@@ -1,4 +1,5 @@
 # tests/test_textnode.py
+
 import unittest
 
 from src.textnode import TextNode, TextType

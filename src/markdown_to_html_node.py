@@ -1,10 +1,10 @@
 # src/markdown_to_html_node.py
 
 from typing import List
-from src.block_to_block_type import BlockType, block_to_block_type
-from src.htmlnode import HTMLNode, ParentNode, LeafNode
-from src.markdown_to_blocks import markdown_to_blocks
-from src.text_to_textnode import text_to_textnodes
+from .block_to_block_type import BlockType, block_to_block_type
+from .htmlnode import HTMLNode, ParentNode, LeafNode
+from .markdown_to_blocks import markdown_to_blocks
+from .text_to_textnode import text_to_textnodes
 
 '''
 Convert a full markdown document to an HTML node.  The HTML node may contain many child HTMLNode objects representing nested HTML elements.
@@ -101,19 +101,24 @@ def block_to_quote(block: str) -> HTMLNode:
     """Convert a block of markdown to an HTML quote node."""
     if not block:
         raise ValueError("Invalid quote")
-    # Remove '> ' from the beginning of each line
-    lines = block.split("\n")
-    new_lines = []
-    for line in lines:
-        if line.startswith("> "):
-            new_lines.append(line[2:])
-        else:
-            new_lines.append(line)
     
-    content = "\n".join(new_lines)
+    # Remove '> ' from the beginning of each line and combine lines
+    lines = block.split("\n")
+    quote_content = []
+    for line in lines:
+        line = line.strip()
+        if line.startswith(">"):
+            # Remove the '>' and any spaces after it
+            quote_content.append(line[1:].strip())
+        elif line:  # If it's a non-empty line without '>', include it
+            pass
+            #quote_content.append(line)
+    
+    # Join all lines with spaces and create a single paragraph
     parent = ParentNode("blockquote", [])
-    children = text_to_children(content)
-    parent.children = children
+    combined_content = "\n".join(quote_content).strip()
+    if combined_content:
+        parent.children.append(ParentNode("p", text_to_children(combined_content)))
     
     return parent
 

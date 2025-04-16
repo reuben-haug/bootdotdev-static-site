@@ -45,6 +45,11 @@ class LeafNode(HTMLNode):
 
     def to_html(self):
         # Return the HTML representation of the LeafNode.
+        if self.tag == "img":
+            if self.props is None:
+                return "<img>"
+            else:
+                return f"<img {self.props_to_html()}>"
         if self.value is None:
             raise ValueError("LeafNode value cannot be None")
         if self.tag is None:
@@ -52,5 +57,4 @@ class LeafNode(HTMLNode):
         if self.props is None:
             return f"<{self.tag}>{self.value}</{self.tag}>"
         else:
-            # Add white space between the tag and the properties
             return f"<{self.tag} {self.props_to_html()}>{self.value}</{self.tag}>"
