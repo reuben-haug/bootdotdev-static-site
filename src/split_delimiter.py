@@ -1,7 +1,7 @@
 # src/split_delimiter.py
 
-from src.textnode import TextNode, TextType
-from src.markdown_parser import extract_markdown_images, extract_markdown_links
+from .textnode import TextNode, TextType
+from .markdown_parser import extract_markdown_images, extract_markdown_links
 from typing import List
 
 def split_nodes_delimiter(old_nodes: List[TextNode], delimiter: str, text_type: TextType) -> List[TextNode]:

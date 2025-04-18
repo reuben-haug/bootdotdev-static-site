@@ -10,12 +10,17 @@ logging.basicConfig(level=logging.DEBUG, format='%(levelname)s: %(message)s')
 def copy_directory(src_path: str, dest_path: str) -> None:
     '''
     Recursively copies the contents of the source directory to the destination directory.
+
+    This function ensures that the destination directory exists, then iterates through the contents of the source directory. Files are copied directly, while subdirectories are processed recursively.
+
+    Args:
+        src_path (str): The path to the source directory.
+        dest_path (str): The path to the destination directory.
     '''
     logging.info(f"Scanning and copying from: '{src_path}' to '{dest_path}'")
 
     # Ensure the destination directory exists
     if not os.path.exists(dest_path):
-        # logging.info(f"Creating directory: {dest_path}")
         os.makedirs(dest_path)
 
     for item in os.scandir(src_path):
@@ -26,16 +31,18 @@ def copy_directory(src_path: str, dest_path: str) -> None:
             logging.info(f"Copying file: '{src_item_path}' to '{dest_item_path}'")
             shutil.copy(src_item_path, dest_item_path)
         elif item.is_dir():
-            # logging.info(f"Found directory: {src_item_path}/")
             # Recursively scan the subdirectory
             copy_directory(src_item_path, dest_item_path)
 
 def copy_static() -> None:
     '''
-    Copies all the contents from the source directory (static) to the destination directory (public).
-    The contents are copied recursively, and the directory structure is preserved.  Before copying, the destination directory and its contents are deleted.
-    '''
+    Copies all the contents from the source directory ("static") to the destination directory ("public").
 
+    This function first checks if the source directory ("static") exists. If it does not, a warning is logged, and the function exits. If the destination directory ("public") exists, it is deleted along with all its contents.  The function then recursively copies the contents of the source directory to the destination directory, preserving the directory structure.
+
+    Args:
+        None
+    '''
     logging.info("Checking if the source directory exists...")
     if not os.path.exists("static"):
         logging.warning("Source directory 'static' does not exist.")
@@ -43,7 +50,7 @@ def copy_static() -> None:
 
     # Create destination directory if it doesn't exist
     if os.path.exists("public"):
-        logging.info("Destination directory 'public' exists.  Deleting...")
+        logging.info("Destination directory 'public' exists. Deleting...")
         shutil.rmtree("public")
 
     # Start recursive copy

@@ -2,9 +2,23 @@
 
 import unittest
 
-from src.markdown_parser import extract_markdown_images, extract_markdown_links
+from src.markdown_parser import extract_title, extract_markdown_images, extract_markdown_links
 
 class TestMarkdownParser(unittest.TestCase):
+    def test_extract_title(self):
+        markdown = "# Heading"
+        self.assertEqual(extract_title(markdown), "Heading")
+    
+    def test_extract_title_empty(self):
+        with self.assertRaises(Exception):
+            extract_title("")
+
+    def test_extract_title_content(self):
+        markdown = """# Tolkien 
+        
+        This is content"""
+        self.assertEqual(extract_title(markdown), "Tolkien")
+
     def test_extract_markdown_images(self):
         matches = extract_markdown_images(
             "This is text with an ![image](https://i.imgur.com/zjjcJKZ.png)"

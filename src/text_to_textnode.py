@@ -1,7 +1,7 @@
 # src/text_to_textnode.py
 
-from .textnode import TextNode, TextType
-from .split_delimiter import split_nodes_delimiter, split_nodes_images, split_nodes_links
+from src.textnode import TextNode, TextType
+from src.split_delimiter import split_nodes_delimiter, split_nodes_images, split_nodes_links
 
 def text_to_textnodes(text) -> list[TextNode]:
     """

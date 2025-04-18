@@ -98,29 +98,24 @@ def block_to_code(block: str) -> HTMLNode:
     return parent
 
 def block_to_quote(block: str) -> HTMLNode:
-    """Convert a block of markdown to an HTML quote node."""
+    """Convert a block of markdown to an HTML quote node, preserving blank lines as \\n\\n."""
     if not block:
         raise ValueError("Invalid quote")
     
-    # Remove '> ' from the beginning of each line and combine lines
+    # Remove '> ' from the beginning of each line, preserve blank lines
     lines = block.split("\n")
-    quote_content = []
+    quote_lines = []
     for line in lines:
-        line = line.strip()
-        if line.startswith(">"):
+        if line.strip().startswith(">"):
             # Remove the '>' and any spaces after it
-            quote_content.append(line[1:].strip())
-        elif line:  # If it's a non-empty line without '>', include it
-            pass
-            #quote_content.append(line)
-    
-    # Join all lines with spaces and create a single paragraph
-    parent = ParentNode("blockquote", [])
-    combined_content = "\n".join(quote_content).strip()
-    if combined_content:
-        parent.children.append(ParentNode("p", text_to_children(combined_content)))
-    
-    return parent
+            quote_lines.append(line.strip()[1:].lstrip())
+        else:
+            # Preserve blank lines (for paragraph breaks)
+            quote_lines.append("")
+    # Re-join lines, preserving blank lines as \n\n
+    combined_content = "\n".join(quote_lines).rstrip()
+
+    return ParentNode("blockquote", [LeafNode(None, combined_content)])
 
 def block_to_unordered_list(block: str) -> HTMLNode:
     """Convert a block of markdown to an HTML unordered list node."""

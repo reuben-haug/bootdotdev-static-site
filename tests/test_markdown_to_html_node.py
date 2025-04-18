@@ -67,7 +67,7 @@ the **same** even with inline stuff
 
         self.assertEqual(
             html,
-            "<div><blockquote><p>This is a quote\nwith multiple lines</p></blockquote><blockquote><p>This is another quote</p></blockquote></div>",
+            "<div><blockquote>This is a quote\nwith multiple lines</blockquote><blockquote>This is another quote</blockquote></div>",
         )
 
     def test_unordered_list(self):
@@ -125,7 +125,7 @@ This is a code block
 
         self.assertEqual(
             html,
-            "<div><h1>This is a heading</h1><h2>This is a subheading</h2><p>This is a paragraph with <b>bold</b> and <i>italic</i> text.</p><pre><code>This is a code block\n</code></pre><blockquote><p>This is a quote</p></blockquote><ul><li>Item 1</li><li>Item 2</li></ul><ol><li>Item 1</li><li>Item 2</li></ol></div>"
+            "<div><h1>This is a heading</h1><h2>This is a subheading</h2><p>This is a paragraph with <b>bold</b> and <i>italic</i> text.</p><pre><code>This is a code block\n</code></pre><blockquote>This is a quote</blockquote><ul><li>Item 1</li><li>Item 2</li></ul><ol><li>Item 1</li><li>Item 2</li></ol></div>"
         )
     def test_empty(self):   
         md = ""
@@ -144,5 +144,5 @@ This is a code block
 
         self.assertEqual(
             html,
-            '<div><blockquote><p>"I am in fact a Hobbit in all but size."\n\n-- J.R.R. Tolkien</p></blockquote></div>'
+            '<div><blockquote>"I am in fact a Hobbit in all but size."\n\n-- J.R.R. Tolkien</blockquote></div>'
         )

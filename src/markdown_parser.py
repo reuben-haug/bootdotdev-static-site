@@ -3,6 +3,23 @@
 import re
 from typing import List, Tuple
 
+def extract_title(markdown: str) -> str:
+    """
+    Extracts the title from the Markdown content. The title is assumed to be the first top-level heading (# Heading).
+
+    Args:
+        markdown (str): The Markdown content.
+    Returns:
+        str: The extracted title.
+    Raises:
+        Exception("No h1 header found.")
+    """
+    match = re.match(r"^#\s+(.+)", markdown)
+    if match:
+        return match.group(1).strip()
+    else:
+        raise Exception("No h1 header found.")
+
 def extract_markdown_images(text: str) -> List[Tuple[str, str]]:
     """
     Extract markdown images from the text.
