@@ -16,7 +16,7 @@ def main():
         basepath = sys.argv[1]
 
     copy_static()
-    # Generate a page from content/index.md using template.html to public/index.html
+    # Generate a page from content/index.md using template.html to docs/index.html
     generate_pages_recursive(basepath, src_dir, template_file, dest_dir)
 
 if __name__ == "__main__":
