@@ -31,9 +31,9 @@ def generate_page(basepath: str, src_path: str, template_path: str, dest_path:st
     title = extract_title(markdown_content)
 
     final_content = template_content.replace("{{ Title }}", title)
-    final_content = template_content.replace("{{ Content }}", html_content)
-    final_content = template_content.replace('href="/', 'href="' + basepath)
-    final_content = template_content.replace('src="/', 'src="' + basepath)
+    final_content = final_content.replace("{{ Content }}", html_content)
+    final_content = final_content.replace('href="/', 'href="' + basepath)
+    final_content = final_content.replace('src="/', 'src="' + basepath)
 
     # public/index.html
     with open(dest_path, 'w') as dest_file:
