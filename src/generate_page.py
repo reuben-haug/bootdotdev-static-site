@@ -1,10 +1,9 @@
 # src/generate_page.py
 import os
-import typing
 from .markdown_to_html_node import markdown_to_html_node
 from .markdown_parser import extract_title
 
-def generate_page(src_path: str, template_path: str, dest_path:str) -> None:
+def generate_page(basepath: str, src_path: str, template_path: str, dest_path:str) -> None:
     '''
     Generates an HTML page from a Markdown file using a specified HTML template.
 
@@ -31,18 +30,21 @@ def generate_page(src_path: str, template_path: str, dest_path:str) -> None:
     html_content = markdown_to_html_node(markdown_content).to_html()
     title = extract_title(markdown_content)
 
-    final_content = template_content.replace("{{ Title }}", title).replace("{{ Content }}", html_content)
+    final_content = template_content.replace("{{ Title }}", title)
+    final_content = template_content.replace("{{ Content }}", html_content)
+    final_content = template_content.replace('href="/', 'href="' + basepath)
+    final_content = template_content.replace('src="/', 'src="' + basepath)
 
     # public/index.html
     with open(dest_path, 'w') as dest_file:
         dest_file.write(final_content)
 
-def generate_pages_recursive(src_dir: str, template_path: str, dest_dir: str) -> None:
+def generate_pages_recursive(basepath: str, src_dir: str, template_path: str, dest_dir: str) -> None:
     '''
     For each markdown file found, generate a new .html file using the same template.html.  The generated pages should be written to the 'public' directory in the same directory structure.
     '''
     
-    print(f"Searching source path for markdown files in {dest_dir}...")
+    print(f"Searching source path for markdown files in {src_dir}...")
 
     if not os.path.exists(dest_dir):
         os.makedirs(dest_dir)
@@ -53,7 +55,7 @@ def generate_pages_recursive(src_dir: str, template_path: str, dest_dir: str) ->
 
         if item.is_file() and item.name.endswith(".md"):
             dest_html_path = os.path.splitext(dest_item_path)[0] + ".html"
-            generate_page(src_item_path, template_path, dest_html_path)
+            generate_page(basepath, src_item_path, template_path, dest_html_path)
 
         elif item.is_dir():
-            generate_pages_recursive(src_item_path, template_path, dest_item_path)
+            generate_pages_recursive(basepath, src_item_path, template_path, dest_item_path)
