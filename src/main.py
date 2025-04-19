@@ -5,9 +5,9 @@ from .copy_static import copy_static
 from .generate_page import generate_pages_recursive
 
 default_basepath = "/"
-src_dir = "content"
-template_file = "template.html"
-dest_dir = "docs"
+src_dir = "./content"
+template_file = "./template.html"
+dest_dir = "./docs"
 
 def main():
     basepath = default_basepath

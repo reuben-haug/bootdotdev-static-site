@@ -49,12 +49,12 @@ def copy_static() -> None:
         return
 
     # Create destination directory if it doesn't exist
-    if os.path.exists("public"):
-        logging.info("Destination directory 'public' exists. Deleting...")
-        shutil.rmtree("public")
+    if os.path.exists("docs"):
+        logging.info("Destination directory 'docs' exists. Deleting...")
+        shutil.rmtree("docs")
 
     # Start recursive copy
-    logging.info("Starting copy from 'static' to 'public'...")
-    copy_directory("static", "public")
+    logging.info("Starting copy from 'static' to 'docs'...")
+    copy_directory("static", "docs")
 
-    logging.info("Finished copying contents from 'static' to 'public'.")
+    logging.info("Finished copying contents from 'static' to 'docs'.")
